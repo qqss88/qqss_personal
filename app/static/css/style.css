@@ -398,6 +398,12 @@ body {
     border: 1px solid var(--success-color);
 }
 
+.alert-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
 /* Footer */
 .footer {
     background-color: var(--text-color);

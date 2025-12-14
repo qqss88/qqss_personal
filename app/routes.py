@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
+from markupsafe import escape
 
 bp = Blueprint('main', __name__)
 
@@ -42,12 +43,22 @@ def projects():
 def contact():
     """Contact page route"""
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message = request.form.get('message')
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        message = request.form.get('message', '').strip()
+        
+        # Basic validation
+        if not name or not email or not message:
+            flash('All fields are required.', 'error')
+            return redirect(url_for('main.contact'))
+        
+        if len(name) > 100 or len(email) > 100 or len(message) > 1000:
+            flash('Input exceeds maximum length.', 'error')
+            return redirect(url_for('main.contact'))
         
         # In a real application, you would send an email or store this data
-        flash(f'Thank you for your message, {name}! I will get back to you soon.', 'success')
+        # Escape user input to prevent XSS
+        flash(f'Thank you for your message, {escape(name)}! I will get back to you soon.', 'success')
         return redirect(url_for('main.contact'))
     
     return render_template('contact.html', title='Contact')

@@ -58,7 +58,8 @@ def contact():
         
         # In a real application, you would send an email or store this data
         # Escape user input to prevent XSS
-        flash(f'Thank you for your message, {escape(name)}! I will get back to you soon.', 'success')
+        safe_name = escape(name)
+        flash(f'Thank you for your message, {safe_name}! I will get back to you soon.', 'success')
         return redirect(url_for('main.contact'))
     
     return render_template('contact.html', title='Contact')

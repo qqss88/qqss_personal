@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>My Projects</h1>
+        <p>Here are some of the projects I've worked on</p>
+    </div>
+</section>
+
+<section class="projects-content">
+    <div class="container">
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card">
+                <h3>{{ project.title | e }}</h3>
+                <p>{{ project.description | e }}</p>
+                <div class="project-tech">
+                    {% for tech in project.technologies %}
+                    <span class="tech-tag">{{ tech | e }}</span>
+                    {% endfor %}
+                </div>
+                <a href="{{ project.link | e }}" class="project-link">View Project →</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

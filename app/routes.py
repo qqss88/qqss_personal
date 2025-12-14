@@ -1,0 +1,53 @@
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+
+bp = Blueprint('main', __name__)
+
+@bp.route('/')
+@bp.route('/home')
+def home():
+    """Home page route"""
+    return render_template('home.html', title='Home')
+
+@bp.route('/about')
+def about():
+    """About page route"""
+    return render_template('about.html', title='About Me')
+
+@bp.route('/projects')
+def projects():
+    """Projects page route"""
+    projects_list = [
+        {
+            'title': 'Project One',
+            'description': 'A sample project showcasing your work',
+            'technologies': ['Python', 'Flask', 'HTML/CSS'],
+            'link': '#'
+        },
+        {
+            'title': 'Project Two',
+            'description': 'Another interesting project',
+            'technologies': ['JavaScript', 'React', 'Node.js'],
+            'link': '#'
+        },
+        {
+            'title': 'Project Three',
+            'description': 'Your latest accomplishment',
+            'technologies': ['Python', 'Django', 'PostgreSQL'],
+            'link': '#'
+        }
+    ]
+    return render_template('projects.html', title='Projects', projects=projects_list)
+
+@bp.route('/contact', methods=['GET', 'POST'])
+def contact():
+    """Contact page route"""
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        
+        # In a real application, you would send an email or store this data
+        flash(f'Thank you for your message, {name}! I will get back to you soon.', 'success')
+        return redirect(url_for('main.contact'))
+    
+    return render_template('contact.html', title='Contact')

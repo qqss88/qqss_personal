@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Welcome to My Personal Website</h1>
+            <p class="hero-subtitle">I'm a passionate developer creating amazing web applications</p>
+            <div class="hero-buttons">
+                <a href="{{ url_for('main.projects') }}" class="btn btn-primary">View My Work</a>
+                <a href="{{ url_for('main.contact') }}" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h2>What I Do</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Web Development</h3>
+                <p>Building responsive and modern web applications using the latest technologies.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Backend Development</h3>
+                <p>Creating robust server-side applications with Python, Flask, and Django.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Problem Solving</h3>
+                <p>Tackling complex challenges with clean, efficient, and maintainable code.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

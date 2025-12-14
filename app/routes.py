@@ -57,7 +57,7 @@ def contact():
             return redirect(url_for('main.contact'))
         
         # In a real application, you would send an email or store this data
-        # Escape user input to prevent XSS
+        # Escape user input to prevent XSS (rendered with | safe filter in template to avoid double-escaping)
         safe_name = escape(name)
         flash(f'Thank you for your message, {safe_name}! I will get back to you soon.', 'success')
         return redirect(url_for('main.contact'))

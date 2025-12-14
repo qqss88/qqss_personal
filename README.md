@@ -125,9 +125,21 @@ This Flask app can be deployed to various platforms including:
 
 ## Security Notes
 
-- Remember to change the `SECRET_KEY` in production
-- Set `FLASK_DEBUG=False` in production
+### Current Implementation
+- ✅ Input validation and sanitization
+- ✅ XSS prevention with MarkupSafe escaping
+- ✅ Secure random SECRET_KEY generation
+- ✅ Localhost-only binding by default
+- ✅ Updated dependencies (no known vulnerabilities)
+
+### Production Recommendations
+- Set `SECRET_KEY` via environment variable
+- Keep `FLASK_DEBUG=false` in production
 - Use environment variables for sensitive information
+- Consider adding Flask-WTF for CSRF protection on forms
+- Implement server-side email validation for contact form
+- Use a production WSGI server (e.g., Gunicorn, uWSGI)
+- Set up HTTPS with SSL/TLS certificates
 
 ## Contributing
 
